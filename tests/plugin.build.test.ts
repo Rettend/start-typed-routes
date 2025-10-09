@@ -3,6 +3,7 @@ import os from 'node:os'
 import path from 'node:path'
 import { describe, expect, it, vi } from 'vitest'
 import { routeTypeGenerator } from '../src'
+import { hookHandler } from './vite-helpers'
 
 const routes = [
   { path: '/' },
@@ -27,11 +28,8 @@ describe('plugin: build-time generation', () => {
     const root = makeTempDir()
     const plugin = routeTypeGenerator()
 
-    await (plugin as any).configResolved?.({
-      command: 'build',
-      root,
-      router: { internals: { routes } },
-    })
+    const onConfigResolved = hookHandler(plugin.configResolved)
+    await onConfigResolved({ command: 'build', root, router: { internals: { routes } } })
 
     const content = readRoutesDts(root)
     expect(content).toContain('export type Path =')
@@ -52,11 +50,12 @@ describe('plugin: build-time generation', () => {
 
     const log = vi.spyOn(console, 'log').mockImplementation(() => {})
 
-    await (plugin as any).configResolved?.({ command: 'build', root, router: { internals: { routes } } })
+    const onConfigResolved = hookHandler(plugin.configResolved)
+    await onConfigResolved({ command: 'build', root, router: { internals: { routes } } })
     expect(log).toHaveBeenCalledTimes(1)
 
     log.mockClear()
-    await (plugin as any).configResolved?.({ command: 'build', root, router: { internals: { routes } } })
+    await onConfigResolved({ command: 'build', root, router: { internals: { routes } } })
     expect(log).not.toHaveBeenCalled()
 
     log.mockRestore()
@@ -66,7 +65,8 @@ describe('plugin: build-time generation', () => {
     const root = makeTempDir()
     const plugin = routeTypeGenerator()
 
-    await (plugin as any).configResolved?.({ command: 'serve', root, router: { internals: { routes } } })
+    const onConfigResolved = hookHandler(plugin.configResolved)
+    await onConfigResolved({ command: 'serve', root, router: { internals: { routes } } })
 
     const content = readRoutesDts(root)
     expect(content).toBe('')

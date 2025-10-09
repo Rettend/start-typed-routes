@@ -3,6 +3,7 @@ import os from 'node:os'
 import path from 'node:path'
 import { describe, expect, it, vi } from 'vitest'
 import { routeTypeGenerator } from '../src'
+import { hookHandler } from './vite-helpers'
 
 type Listener = (...args: any[]) => void
 
@@ -66,7 +67,8 @@ describe('plugin: dev watch', () => {
 
     const log = vi.spyOn(console, 'log').mockImplementation(() => {})
 
-    void (plugin as any).configureServer?.(server)
+    const onConfigureServer = hookHandler(plugin.configureServer)
+    onConfigureServer(server)
 
     watcher.emit('ready')
     await Promise.resolve()
@@ -108,7 +110,8 @@ describe('plugin: dev watch', () => {
 
     const log = vi.spyOn(console, 'log').mockImplementation(() => {})
 
-    void (plugin as any).configureServer?.(server)
+    const onConfigureServer = hookHandler(plugin.configureServer)
+    onConfigureServer(server)
 
     watcher.emit('ready')
     await Promise.resolve()

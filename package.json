@@ -39,7 +39,7 @@
     "dev": "tsdown --watch",
     "play": "bun --bun vinxi dev --config playground/app.config.ts",
     "test": "vitest",
-    "check": "tsgo --noEmit",
+    "check": "tsgo --noEmit --project ./tsconfig.json",
     "lint": "bun --bun eslint . --fix",
     "update": "taze latest -wr",
     "release": "bumpp && npm publish",
