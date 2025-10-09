@@ -1,7 +1,7 @@
 import { useNavigate, useParams } from '../../router'
 
 export default function UserDetail() {
-   const params = useParams<'/users/:id'>()
+  const params = useParams<'/users/:id'>()
   const nav = useNavigate()
   return (
     <div>
