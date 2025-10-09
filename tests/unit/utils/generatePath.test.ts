@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { generatePath } from '../src/utils'
+import { generatePath } from '../../../src/utils'
 
 describe('generatePath', () => {
   it('replaces required params', () => {

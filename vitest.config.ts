@@ -6,10 +6,23 @@ export default defineConfig({
   test: {
     environment: 'happy-dom',
     globals: true,
-    setupFiles: './tests/setup.ts',
+    setupFiles: './tests/helpers/setup.ts',
     coverage: {
       enabled: true,
       provider: 'v8',
+      include: [
+        'src/**',
+      ],
+      exclude: [
+        'tests/helpers/**',
+        'playground/**',
+        'dist/**',
+        'coverage/**',
+        '**/*.d.ts',
+        'eslint.config.js',
+        'vitest.config.ts',
+        'tsdown.config.ts',
+      ],
     },
   },
 })

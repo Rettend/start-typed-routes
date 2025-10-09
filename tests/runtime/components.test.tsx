@@ -15,7 +15,7 @@ vi.mock('@solidjs/router', () => ({
   },
 }))
 
-const { components } = await import('../src')
+const { components } = await import('../../src')
 
 type Path = '/' | '/users' | '/users/:id' | '/search/:q?'
 interface Params {

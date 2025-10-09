@@ -2,8 +2,8 @@ import fs from 'node:fs'
 import os from 'node:os'
 import path from 'node:path'
 import { describe, expect, it, vi } from 'vitest'
-import { routeTypeGenerator } from '../src'
-import { hookHandler } from './vite-helpers'
+import { routeTypeGenerator } from '../../../src'
+import { hookHandler } from '../../helpers/vite'
 
 const routes = [
   { path: '/' },

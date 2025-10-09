@@ -1,5 +1,5 @@
 import { describe, expect, it, vi } from 'vitest'
-import { debounce, uniqueSorted } from '../src/utils'
+import { debounce, uniqueSorted } from '../../../src/utils'
 
 describe('uniqueSorted', () => {
   it('dedupes and sorts lexicographically', () => {

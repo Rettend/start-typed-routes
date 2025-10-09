@@ -12,7 +12,7 @@ vi.mock('@solidjs/router', async (importActual) => {
   }
 })
 
-const { hooks } = await import('../src')
+const { hooks } = await import('../../src')
 
 type Path = '/' | '/users' | '/users/:id' | '/search/:q?'
 interface Params {

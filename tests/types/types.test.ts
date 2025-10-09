@@ -1,4 +1,4 @@
-import type { AnchorProps, NavigateOptions, NavigateProps } from '../src/types'
+import type { AnchorProps, NavigateOptions, NavigateProps } from '../../src/types'
 import { describe, expectTypeOf, it } from 'vitest'
 
 type _Path = '/' | '/users' | '/users/:id' | '/search/:q?'

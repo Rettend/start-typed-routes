@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import * as entry from '../src'
+import * as entry from '../../src'
 
 describe('package exports', () => {
   it('exposes components, hooks, routeTypeGenerator, and utils', () => {
