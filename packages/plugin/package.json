@@ -1,7 +1,7 @@
 {
   "name": "start-typed-routes",
   "type": "module",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Add strong types to SolidStart routes",
   "homepage": "https://github.com/Rettend/start-typed-routes#readme",
   "repository": {
