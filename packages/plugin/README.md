@@ -1,37 +1,18 @@
 # start-typed-routes
 
-Add strong, ergonomic types to SolidStart routes. Generate a `Path` union and `Params` map from your app routes, and use typed `<A>`, `<Navigate>`, and hooks that mirror `@solidjs/router` but with route-aware params.
+Add strong types to SolidStart routes.
 
-- Zero-runtime DX helpers (tiny wrapper over Solid Router)
+- Zero-runtime DX helpers (dev-only wrapper over Solid Router)
 - Route types generated automatically at dev/build
-- Supports optional params (`:id?`) and catch-all (`*rest`)
-- Works with SolidStart / Vinxi projects
+- Supports all file based routing conventions of SolidStart
 
 ## Installation
 
-Peer dependencies:
-
-- `solid-js` >= 1.9.0
-- `@solidjs/router` >= 0.15.0
-
-Install the package:
-
 ```sh
-bun add start-typed-routes
-# or
-npm i start-typed-routes
-# or
-yarn add start-typed-routes
+bun i -D start-typed-routes
 ```
 
-## Route types generator
-
-Register the plugin so it emits `src/routes.d.ts` for your app. The file contains:
-
-- `export type Path = ...` (string union of all routes)
-- `export type Params = { [path in Path]?: ... }` (only paths with params appear)
-
-Example SolidStart config:
+## Setup
 
 ```ts
 // app.config.ts
@@ -45,14 +26,6 @@ export default defineConfig({
 })
 ```
 
-Notes:
-
-- Removes group segments like `(group)` from paths when generating types.
-- Handles `:param`, `:param?`, and `*catchAll`.
-- Writes to `src/routes.d.ts` only when content changes.
-
-## Usage
-
 In your app, bind the helpers to the generated types:
 
 ```ts
@@ -64,7 +37,7 @@ export const { A, Navigate } = components<Path, Params>()
 export const { useParams, useNavigate, useMatch } = hooks<Path, Params>()
 ```
 
-Then use them in components:
+## Usage
 
 ```tsx
 <>
@@ -91,37 +64,19 @@ Then use them in components:
   {/* Typed match */}
   {(() => {
     const match = useMatch(() => '/users/:id')
-    //          ^? Accessor<{ path: '/users/:id', params: { id: string } } | undefined>
+    //    ^? Accessor<{ path: '/users/:id', params: { id: string } } | undefined>
     return null
   })()}
 </>
 ```
 
-## API
+## Supported route syntax
 
-- `components<Path, Params>()`
-  - `A(props: AnchorProps<Path, Params>)`
-  - `Navigate(props: NavigateProps<Path, Params>)`
-- `hooks<Path, Params>()`
-  - `useParams<P extends keyof Params>(): Params[P]`
-  - `useNavigate(): (href: Path, ...[options]: NavigateOptions<Path, Params>) => void`
-  - `useMatch<P extends Path>(path: () => P, filters?): Accessor<{ path: P; params: Params[P] } | undefined>`
-
-Types ensure that:
-
-- `params` is required only when the route requires it.
-- Optional params (`:q?`) make `params.q` optional.
-- Routes without params disallow `params`.
-
-## Playground
-
-There’s a working example under `packages/playground`. It uses the plugin directly from source for quick iteration.
-
-## Requirements
-
-- Node >= 18.17
-- Solid Router / SolidJS versions per peer deps
+- Dynamic segment: `routes/users/[id].tsx` -> `/users/:id`
+- Optional segment: `routes/search/[[q]].tsx` -> `/search/:q?`
+- Catch-all: `routes/blog/[...post].tsx` -> `/blog/*post`
+- Grouping folders/files: `(...)` are omitted in URLs (e.g. `routes/(static)/about-us/index.tsx` -> `/about-us`)
 
 ## License
 
-MIT © Contributors
+MIT
