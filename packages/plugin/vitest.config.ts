@@ -1,8 +1,6 @@
-import solid from 'rolldown-plugin-solid'
 import { defineConfig } from 'vitest/config'
 
 export default defineConfig({
-  plugins: [solid() as any],
   test: {
     environment: 'happy-dom',
     globals: true,
@@ -10,13 +8,13 @@ export default defineConfig({
     coverage: {
       enabled: true,
       provider: 'v8',
-      include: [
-        'packages/plugin/src/**',
-      ],
+      reporter: ['text', 'html', 'lcov'],
+      include: ['src/**'],
       exclude: [
-        'packages/plugin/tests/helpers/**',
-        'packages/plugin/playground/**',
+        'tests/helpers/**',
+        'playground/**',
         '**/dist/**',
+        'src/all.ts',
         '**/coverage/**',
         '**/*.d.ts',
         '**/eslint.config.js',

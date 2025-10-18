@@ -46,6 +46,7 @@
     "build": "tsdown",
     "dev": "tsdown --watch",
     "test": "vitest",
+    "test:ui": "vitest --ui",
     "lint": "bun --bun eslint . --fix",
     "check": "tsgo --noEmit -p ./tsconfig.json",
     "release": "bumpp && npm publish",
