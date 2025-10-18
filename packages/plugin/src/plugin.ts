@@ -104,9 +104,9 @@ async function generateRouteTypes(root: string, routesSource: any, logSuffix: st
   writeIfChanged(outputPath, content, logSuffix, logger)
 }
 
-export function routeTypeGenerator(): Plugin {
+export function typedRoutes(): Plugin {
   return {
-    name: 'solid-start-route-types',
+    name: 'solid-start-typed-routes',
     enforce: 'post',
     async configResolved(config) {
       if (config.command === 'serve')

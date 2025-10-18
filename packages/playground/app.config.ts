@@ -1,9 +1,9 @@
 import { defineConfig } from '@solidjs/start/config'
-import { routeTypeGenerator } from '../plugin/src/plugin'
+import { typedRoutes } from '../plugin/src/plugin'
 
 export default defineConfig({
   vite: {
-    plugins: [routeTypeGenerator() as any],
+    plugins: [typedRoutes() as any],
     resolve: {
       alias: {
         'start-typed-routes/plugin': new URL('../plugin/src/plugin.ts', import.meta.url).pathname,

@@ -36,11 +36,11 @@ Example SolidStart config:
 ```ts
 // app.config.ts
 import { defineConfig } from '@solidjs/start/config'
-import { routeTypeGenerator } from 'start-typed-routes/plugin'
+import { typedRoutes } from 'start-typed-routes/plugin'
 
 export default defineConfig({
   vite: {
-    plugins: [routeTypeGenerator() as any],
+    plugins: [typedRoutes() as any],
   },
 })
 ```

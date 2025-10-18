@@ -2,7 +2,7 @@ import fs from 'node:fs'
 import os from 'node:os'
 import path from 'node:path'
 import { describe, expect, it, vi } from 'vitest'
-import { routeTypeGenerator } from '../../../src/plugin'
+import { typedRoutes } from '../../../src/plugin'
 import { hookHandler } from '../../helpers/vite'
 
 const routes = [
@@ -38,7 +38,7 @@ function readRoutesDts(root: string) {
 describe('plugin: build-time generation', () => {
   it('writes routes.d.ts with expected union and params', async () => {
     const root = makeTempDir()
-    const plugin = routeTypeGenerator()
+    const plugin = typedRoutes()
 
     const onConfigResolved = hookHandler(plugin.configResolved)
     await onConfigResolved({ command: 'build', root, router: { internals: { routes } } })
@@ -67,7 +67,7 @@ describe('plugin: build-time generation', () => {
 
   it('is idempotent (no log on second identical write)', async () => {
     const root = makeTempDir()
-    const plugin = routeTypeGenerator()
+    const plugin = typedRoutes()
 
     const log = vi.spyOn(console, 'log').mockImplementation(() => {})
 
@@ -84,7 +84,7 @@ describe('plugin: build-time generation', () => {
 
   it('serve command is a no-op', async () => {
     const root = makeTempDir()
-    const plugin = routeTypeGenerator()
+    const plugin = typedRoutes()
 
     const onConfigResolved = hookHandler(plugin.configResolved)
     await onConfigResolved({ command: 'serve', root, router: { internals: { routes } } })
