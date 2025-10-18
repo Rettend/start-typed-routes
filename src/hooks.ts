@@ -11,7 +11,7 @@ export function hooks<Path extends string, Params extends Record<string, any>>()
     useNavigate: () => {
       const navigate = useNavigate()
       return <P extends Path>(href: P, ...[options]: NavigateOptions<P, Params>) => {
-        const finalHref = generatePath(href, (options as any)?.params ?? {})
+        const finalHref = generatePath(href, options?.params ?? {})
         navigate(finalHref as P, options)
       }
     },

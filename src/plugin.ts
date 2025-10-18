@@ -1,4 +1,4 @@
-import type { Plugin } from 'vite'
+import type { Logger, Plugin } from 'vite'
 import fs from 'node:fs'
 import path from 'node:path'
 import { debounce, uniqueSorted } from './utils'
@@ -72,17 +72,17 @@ function buildTypesContent(allPaths: string[]): string {
   return `/* eslint-disable */\n\n${pathType}\n\n${paramsType}\n`
 }
 
-function writeIfChanged(outputPath: string, content: string, logSuffix: string) {
+function writeIfChanged(outputPath: string, content: string, logSuffix: string, logger: Logger) {
   fs.mkdirSync(path.dirname(outputPath), { recursive: true })
   const prev = fs.existsSync(outputPath) ? fs.readFileSync(outputPath, 'utf-8') : ''
   if (prev !== content) {
     fs.writeFileSync(outputPath, content, 'utf-8')
-    // eslint-disable-next-line no-console
-    console.log('[route-types]', logSuffix, outputPath)
+    const msg = `[route-types] ${logSuffix} ${outputPath}`
+    logger.info(msg)
   }
 }
 
-async function generateRouteTypes(root: string, routesSource: any, logSuffix: string) {
+async function generateRouteTypes(root: string, routesSource: any, logSuffix: string, logger: Logger) {
   const routes = await getRoutesFromSource(routesSource)
   if (!routes || routes.length === 0)
     return
@@ -90,7 +90,7 @@ async function generateRouteTypes(root: string, routesSource: any, logSuffix: st
   const allPaths = uniqueSorted(extractPaths(routes))
   const content = buildTypesContent(allPaths)
   const outputPath = path.resolve(root, 'src/routes.d.ts')
-  writeIfChanged(outputPath, content, logSuffix)
+  writeIfChanged(outputPath, content, logSuffix, logger)
 }
 
 export function routeTypeGenerator(): Plugin {
@@ -105,6 +105,7 @@ export function routeTypeGenerator(): Plugin {
           config.root,
           config.router?.internals?.routes,
           'Generated route types at:',
+          config.logger,
         )
       }
       catch {}
@@ -116,6 +117,7 @@ export function routeTypeGenerator(): Plugin {
             server.config.root,
             server.config.router?.internals?.routes,
             'Generated route types (dev) at:',
+            server.config.logger,
           )
         }
         catch {}
