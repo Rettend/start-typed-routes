@@ -1,3 +1,5 @@
+/// <reference path="./vinxi.d.ts" />
+
 import type { Logger, Plugin } from 'vite'
 import fs from 'node:fs'
 import path from 'node:path'
@@ -72,17 +74,18 @@ function buildTypesContent(allPaths: string[]): string {
   return `/* eslint-disable */\n\n${pathType}\n\n${paramsType}\n`
 }
 
-function writeIfChanged(outputPath: string, content: string, logSuffix: string, logger: Logger) {
+function writeIfChanged(outputPath: string, content: string, logSuffix: string, logger?: Logger) {
   fs.mkdirSync(path.dirname(outputPath), { recursive: true })
   const prev = fs.existsSync(outputPath) ? fs.readFileSync(outputPath, 'utf-8') : ''
   if (prev !== content) {
     fs.writeFileSync(outputPath, content, 'utf-8')
     const msg = `[route-types] ${logSuffix} ${outputPath}`
-    logger.info(msg)
+    // eslint-disable-next-line no-console
+    void (logger?.info ?? console.log)(msg)
   }
 }
 
-async function generateRouteTypes(root: string, routesSource: any, logSuffix: string, logger: Logger) {
+async function generateRouteTypes(root: string, routesSource: any, logSuffix: string, logger?: Logger) {
   const routes = await getRoutesFromSource(routesSource)
   if (!routes || routes.length === 0)
     return

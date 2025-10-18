@@ -12,6 +12,7 @@
     "play": "bun run --filter start-typed-routes-playground dev",
     "test": "bun run --filter start-typed-routes test",
     "lint": "bun --bun eslint . --fix",
+    "check": "bun run --filter start-typed-routes check && bun run --filter start-typed-routes-playground check",
     "release": "bun run --filter start-typed-routes release",
     "update": "taze latest -rw"
   },

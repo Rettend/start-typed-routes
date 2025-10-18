@@ -3,7 +3,7 @@ import { defineConfig } from 'tsdown'
 
 export default defineConfig([
   {
-    entry: ['./src/index.ts', './src/all.ts'],
+    entry: ['./src/index.ts', './src/all.ts', './src/plugin.ts'],
     platform: 'neutral',
     dts: {
       tsgo: true,
@@ -14,7 +14,7 @@ export default defineConfig([
     plugins: [solid()],
   },
   {
-    entry: ['./src/index.ts', './src/all.ts'],
+    entry: ['./src/index.ts', './src/all.ts', './src/plugin.ts'],
     platform: 'neutral',
     dts: false,
     inputOptions: {

@@ -2,15 +2,15 @@ import { describe, expect, it, vi } from 'vitest'
 
 const navCalls = vi.hoisted(() => [] as Array<{ to: string, options: any }>)
 
-vi.mock('@solidjs/router', async (importActual) => {
-  const actual = await importActual<any>()
-  return {
-    ...actual,
-    useNavigate: () => (to: string, options?: any) => {
-      navCalls.push({ to, options })
-    },
-  }
-})
+vi.mock('@solidjs/router', () => ({
+  useNavigate: () => (to: string, options?: any) => {
+    navCalls.push({ to, options })
+  },
+  useParams: () => ({}),
+  useMatch: () => () => undefined,
+  A: () => null,
+  Navigate: () => null,
+}))
 
 const { hooks } = await import('../../src')
 

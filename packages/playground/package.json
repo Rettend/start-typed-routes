@@ -3,7 +3,9 @@
   "type": "module",
   "private": true,
   "scripts": {
-    "dev": "bun --bun vinxi dev"
+    "dev": "bun --bun vinxi dev",
+    "lint": "bun --bun eslint . --fix",
+    "check": "tsgo --noEmit -p ./tsconfig.json"
   },
   "dependencies": {
     "@solidjs/start": "^1.2.0",

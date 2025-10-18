@@ -17,6 +17,11 @@
       "solid": "./dist/index.jsx",
       "default": "./dist/index.js"
     },
+    "./plugin": {
+      "types": "./dist/plugin.d.ts",
+      "solid": "./dist/plugin.jsx",
+      "default": "./dist/plugin.js"
+    },
     "./all": {
       "types": "./dist/all.d.ts",
       "solid": "./dist/all.jsx",
@@ -41,6 +46,7 @@
     "dev": "tsdown --watch",
     "test": "vitest",
     "lint": "bun --bun eslint . --fix",
+    "check": "tsgo --noEmit -p ./tsconfig.json",
     "release": "bumpp && npm publish",
     "prepublishOnly": "bun run build"
   },
