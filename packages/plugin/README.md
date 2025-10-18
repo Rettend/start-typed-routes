@@ -1,6 +1,11 @@
-# start-typed-routes
+<h1 align="center">start-typed-routes</h1>
+<p align="center">
+  Add strong types to SolidStart routes.  
+</p>
 
-Add strong types to SolidStart routes.
+<p align="center">
+  <a href="https://www.npmjs.com/package/start-typed-routes"><img src="https://img.shields.io/npm/v/start-typed-routes?color=red" alt="NPM Version"></a>
+</p>
 
 - Zero-runtime DX helpers (dev-only wrapper over Solid Router)
 - Route types generated automatically at dev/build
