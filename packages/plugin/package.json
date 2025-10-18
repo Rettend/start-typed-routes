@@ -1,5 +1,5 @@
 {
-  "name": "start-typed-routes-monorepo",
+  "name": "start-typed-routes",
   "type": "module",
   "version": "0.0.0",
   "packageManager": "bun@1.2.23",
