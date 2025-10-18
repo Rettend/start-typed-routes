@@ -1,5 +1,3 @@
-export * from './components'
-export * from './hooks'
-export * from './plugin'
-export * from './types'
-export * from './utils'
+export { components } from './components'
+export { hooks } from './hooks'
+export { routeTypeGenerator } from './plugin'

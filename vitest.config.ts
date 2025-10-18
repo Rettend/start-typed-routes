@@ -1,4 +1,4 @@
-import solid from 'vite-plugin-solid'
+import solid from 'rolldown-plugin-solid'
 import { defineConfig } from 'vitest/config'
 
 export default defineConfig({
@@ -11,17 +11,17 @@ export default defineConfig({
       enabled: true,
       provider: 'v8',
       include: [
-        'src/**',
+        'packages/plugin/src/**',
       ],
       exclude: [
-        'tests/helpers/**',
-        'playground/**',
-        'dist/**',
-        'coverage/**',
+        'packages/plugin/tests/helpers/**',
+        'packages/plugin/playground/**',
+        '**/dist/**',
+        '**/coverage/**',
         '**/*.d.ts',
-        'eslint.config.js',
-        'vitest.config.ts',
-        'tsdown.config.ts',
+        '**/eslint.config.js',
+        '**/vitest.config.ts',
+        '**/tsdown.config.ts',
       ],
     },
   },
