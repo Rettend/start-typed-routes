@@ -56,7 +56,10 @@ describe('plugin: dev watch', () => {
           internals: {
             routes: [
               { path: '/' },
-              { path: '/users', children: [{ path: '/:id' }] },
+              { path: '/users', children: [
+                { path: '/:id' },
+                { path: '/:id?' },
+              ] },
               { path: '/search', children: [{ path: '/:q?' }] },
             ],
           },

@@ -17,7 +17,8 @@ function extractPaths(routes: Route[], parentPath = ''): string[] {
     const normalizedCurrent = raw
       .split('/')
       .filter(Boolean)
-      .filter(segment => !(segment.startsWith('(') && segment.endsWith(')')))
+      .map(segment => segment.replace(/\([^)]*\)/g, ''))
+      .filter(Boolean)
       .join('/')
     const fullPath = [parentPath, normalizedCurrent]
       .filter(Boolean)
@@ -34,25 +35,32 @@ function extractPaths(routes: Route[], parentPath = ''): string[] {
 function generateParamsType(paths: string[]): string {
   const params: string[] = []
   const paramRegex = /:(\w+\??)/g
+  const catchAllRegex = /\*(\w+)/g
 
   for (const path of paths) {
-    const matches = Array.from(path.matchAll(paramRegex))
-    if (matches.length > 0) {
-      const paramDefs = matches.map((match) => {
+    const colonParams = Array.from(path.matchAll(paramRegex))
+    const starParams = Array.from(path.matchAll(catchAllRegex))
+    if (colonParams.length > 0 || starParams.length > 0) {
+      const paramDefs: string[] = []
+      for (const match of colonParams) {
         const paramName = match[1]
         if (paramName?.endsWith('?'))
-          return `${paramName.slice(0, -1)}?: string`
-
-        return `${paramName}: string`
-      })
-      params.push(`  '${path}': { ${paramDefs.join('; ')} }`)
+          paramDefs.push(`${paramName.slice(0, -1)}?: string`)
+        else
+          paramDefs.push(`${paramName}: string`)
+      }
+      for (const match of starParams) {
+        const name = match[1]
+        paramDefs.push(`${name}: string`)
+      }
+      params.push(`  '${path}': { ${paramDefs.join(', ')} }`)
     }
   }
 
   if (params.length === 0)
     return 'export type Params = {}'
 
-  return `export type Params = {\n${params.join(';\n')}\n}`
+  return `export type Params = {\n${params.join('\n')}\n}`
 }
 
 async function getRoutesFromSource(source: any): Promise<Route[] | undefined> {

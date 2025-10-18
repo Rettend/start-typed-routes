@@ -1,5 +1,6 @@
 export function generatePath(path: string, params: Record<string, string | undefined>) {
-  return path.replace(/\/:(\w+)(\??)/g, (_, segment) => (params[segment] ? `/${params[segment]}` : ''))
+  const withStars = path.replace(/\/\*(\w+)/g, (_, name: string) => (params[name] ? `/${params[name]}` : ''))
+  return withStars.replace(/\/:(\w+)(\??)/g, (_m, name: string) => (params[name] ? `/${params[name]}` : ''))
 }
 
 export function uniqueSorted<T>(items: T[]): T[] {
