@@ -3,7 +3,7 @@ import { typedRoutes } from '../plugin/src/plugin'
 
 export default defineConfig({
   vite: {
-    plugins: [typedRoutes() as any],
+    plugins: [typedRoutes()],
     resolve: {
       alias: {
         'start-typed-routes/plugin': new URL('../plugin/src/plugin.ts', import.meta.url).pathname,

@@ -1,3 +1,4 @@
+import type { UserConfig } from 'tsdown'
 import solid from 'rolldown-plugin-solid'
 import { defineConfig } from 'tsdown'
 
@@ -25,4 +26,4 @@ export default defineConfig([
       js: '.jsx',
     }),
   },
-])
+] as UserConfig) // TODO: remove

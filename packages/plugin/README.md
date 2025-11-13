@@ -1,6 +1,6 @@
 <h1 align="center">start-typed-routes</h1>
 <p align="center">
-  Add strong types to SolidStart routes.  
+  Add strong types to SolidStart routes.
 </p>
 
 <p align="center">
@@ -26,7 +26,7 @@ import { typedRoutes } from 'start-typed-routes/plugin'
 
 export default defineConfig({
   vite: {
-    plugins: [typedRoutes() as any],
+    plugins: [typedRoutes()],
   },
 })
 ```
@@ -40,6 +40,7 @@ import { components, hooks } from 'start-typed-routes'
 
 export const { A, Navigate } = components<Path, Params>()
 export const { useParams, useNavigate, useMatch } = hooks<Path, Params>()
+export type { Params, Path }
 ```
 
 ## Usage
