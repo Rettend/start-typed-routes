@@ -43,6 +43,22 @@ export const { useParams, useNavigate, useMatch } = hooks<Path, Params>()
 export type { Params, Path }
 ```
 
+## Configuration
+
+Use the `exclude` option to skip generating types for specific route patterns. `/api/**` is excluded by default.
+
+```ts
+export default defineConfig({
+  vite: {
+    plugins: [
+      typedRoutes({ exclude: ['/api/**'] }),
+    ],
+  },
+})
+```
+
+Pass an empty array to `exclude` to disable the default filtering.
+
 ## Usage
 
 ```tsx

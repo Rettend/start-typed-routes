@@ -1,9 +1,15 @@
 /// <reference path="./vinxi.d.ts" />
 
 import type { Logger, Plugin } from 'vite'
+import type { ExcludePattern } from './route-filter'
 import fs from 'node:fs'
 import path from 'node:path'
+import { filterPaths, normalizeExcludePatterns } from './route-filter'
 import { debounce, uniqueSorted } from './utils'
+
+export interface TypedRoutesOptions {
+  exclude?: ExcludePattern
+}
 
 interface Route {
   path: string
@@ -93,18 +99,29 @@ function writeIfChanged(outputPath: string, content: string, logSuffix: string, 
   }
 }
 
-async function generateRouteTypes(root: string, routesSource: any, logSuffix: string, logger?: Logger) {
+async function generateRouteTypes(
+  root: string,
+  routesSource: any,
+  logSuffix: string,
+  logger: Logger | undefined,
+  excludePatterns: string[],
+) {
   const routes = await getRoutesFromSource(routesSource)
   if (!routes || routes.length === 0)
     return
 
   const allPaths = uniqueSorted(extractPaths(routes))
-  const content = buildTypesContent(allPaths)
+  const filteredPaths = filterPaths(allPaths, excludePatterns)
+  if (filteredPaths.length === 0)
+    return
+
+  const content = buildTypesContent(filteredPaths)
   const outputPath = path.resolve(root, 'src/routes.d.ts')
   writeIfChanged(outputPath, content, logSuffix, logger)
 }
 
-export function typedRoutes(): Plugin {
+export function typedRoutes(options: TypedRoutesOptions = {}): Plugin {
+  const excludePatterns = normalizeExcludePatterns(options.exclude)
   return {
     name: 'solid-start-typed-routes',
     enforce: 'post',
@@ -117,6 +134,7 @@ export function typedRoutes(): Plugin {
           config.router?.internals?.routes,
           'Generated route types at:',
           config.logger,
+          excludePatterns,
         )
       }
       catch {}
@@ -129,6 +147,7 @@ export function typedRoutes(): Plugin {
             server.config.router?.internals?.routes,
             'Generated route types (dev) at:',
             server.config.logger,
+            excludePatterns,
           )
         }
         catch {}

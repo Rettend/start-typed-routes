@@ -55,5 +55,11 @@
   "peerDependencies": {
     "@solidjs/router": ">=0.15.0",
     "solid-js": ">=1.9.0"
+  },
+  "dependencies": {
+    "picomatch": "^4.0.3"
+  },
+  "devDependencies": {
+    "@types/picomatch": "^4.0.2"
   }
 }
