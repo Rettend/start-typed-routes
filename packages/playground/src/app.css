@@ -59,3 +59,19 @@ p {
 .increment:active {
   background-color: rgba(68, 107, 158, 0.2);
 }
+
+.sidebar-link {
+  display: block;
+  margin-top: 0.5rem;
+  padding: 0.5rem 0.75rem;
+  border: 2px solid #000;
+  text-decoration: none;
+}
+
+.is-expanded {
+  background-color: #c8e6c9;
+}
+
+.is-collapsed {
+  background-color: #ffcdd2;
+}

@@ -2,6 +2,7 @@ import { defineConfig } from '@solidjs/start/config'
 import { typedRoutes } from '../plugin/src/plugin'
 
 export default defineConfig({
+  ssr: false,
   vite: {
     plugins: [typedRoutes()],
     resolve: {

@@ -1,0 +1,16 @@
+diff --git a/dist/esm/index.js b/dist/esm/index.js
+index f35f982bcbf95c266954765a9fc65cab94f7e35d..801b7c2944be5807d17be5ef7160dee45c761e6f 100644
+--- a/dist/esm/index.js
++++ b/dist/esm/index.js
+@@ -76,6 +76,11 @@ function transformCode({
+   onDirectiveFnsById,
+   root
+ }) {
++  // Skip Vite virtual modules (like `/@solid-refresh`) or other non-file ids
++  // that would cause `pathToFileURL`/`fileURLToPath` to throw.
++  if (typeof id === "string" && (id.startsWith("/@") || id.startsWith("\0") || id.startsWith("virtual:"))) {
++    return null;
++  }
+   const url = pathToFileURL(id);
+   url.searchParams.delete("v");
+   id = fileURLToPath(url).replace(/\\/g, "/");

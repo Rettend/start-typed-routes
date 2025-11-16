@@ -22,6 +22,7 @@
     "@solidjs/router": "^0.15.4",
     "@solidjs/start": "^1.2.0",
     "@solidjs/testing-library": "^0.8.10",
+    "@tanstack/directive-functions-plugin": "1.121.21",
     "@types/node": "latest",
     "@typescript/native-preview": "^7.0.0-dev.20251116.1",
     "@vitest/coverage-v8": "^4.0.9",
@@ -40,5 +41,8 @@
   },
   "overrides": {
     "vite": "npm:rolldown-vite@latest"
+  },
+  "patchedDependencies": {
+    "@tanstack/directive-functions-plugin@1.121.21": "patches/@tanstack%2Fdirective-functions-plugin@1.121.21.patch"
   }
 }

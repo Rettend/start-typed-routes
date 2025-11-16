@@ -1,3 +1,5 @@
+import type { Plugin } from 'vite'
+import solid from 'rolldown-plugin-solid'
 import { defineConfig } from 'vitest/config'
 
 export default defineConfig({
@@ -23,4 +25,5 @@ export default defineConfig({
       ],
     },
   },
+  plugins: [solid() as Plugin],
 })
