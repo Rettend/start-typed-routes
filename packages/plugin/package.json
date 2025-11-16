@@ -49,7 +49,7 @@
     "test:ui": "vitest --ui",
     "lint": "bun --bun eslint . --fix",
     "check": "tsgo --noEmit -p ./tsconfig.json",
-    "release": "bumpp && npm publish",
+    "release": "bumpp && bun publish",
     "prepublishOnly": "bun run build"
   },
   "peerDependencies": {

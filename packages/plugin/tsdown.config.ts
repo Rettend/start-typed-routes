@@ -19,7 +19,7 @@ export default defineConfig([
     platform: 'neutral',
     dts: false,
     inputOptions: {
-      jsx: 'preserve',
+      jsx: 'preserve', // TODO: apparently this is invalid?
       external: ['node:fs', 'node:path'],
     },
     outExtensions: () => ({

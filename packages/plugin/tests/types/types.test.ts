@@ -67,3 +67,23 @@ describe('types: NavigateOptions tuple', () => {
     accepts({ params: { stuff: 'x' } })
   })
 })
+
+describe('types: Path unions integration', () => {
+  it('allows Path union variables without forcing params', () => {
+    const href: _Path = '/users'
+    const props: AnchorProps<_Path, Params> = { href }
+    void props
+  })
+
+  it('allows providing params when the union value needs them', () => {
+    const href: _Path = '/users/:id'
+    const props: AnchorProps<_Path, Params> = { href, params: { id: '7' } }
+    void props
+  })
+
+  it('still rejects missing params for concrete paths', () => {
+    // @ts-expect-error params are required for /users/:id when the literal path is known
+    const bad: AnchorProps<'/users/:id', Params> = { href: '/users/:id' }
+    void bad
+  })
+})
