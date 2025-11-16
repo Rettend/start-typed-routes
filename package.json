@@ -18,25 +18,25 @@
     "update": "taze latest -rw"
   },
   "devDependencies": {
-    "@antfu/eslint-config": "^6.0.0",
-    "@solidjs/router": "^0.15.3",
+    "@antfu/eslint-config": "^6.2.0",
+    "@solidjs/router": "^0.15.4",
     "@solidjs/start": "^1.2.0",
     "@solidjs/testing-library": "^0.8.10",
     "@types/node": "latest",
-    "@typescript/native-preview": "^7.0.0-dev.20251018.1",
-    "@vitest/coverage-v8": "^3.2.4",
+    "@typescript/native-preview": "^7.0.0-dev.20251116.1",
+    "@vitest/coverage-v8": "^4.0.9",
     "@vitest/ui": "3.2.4",
     "bumpp": "^10.3.1",
-    "eslint": "^9.38.0",
+    "eslint": "^9.39.1",
     "eslint-plugin-solid": "^0.14.5",
-    "happy-dom": "^20.0.5",
+    "happy-dom": "^20.0.10",
     "rolldown-plugin-solid": "^0.2.1",
-    "solid-js": "^1.9.9",
+    "solid-js": "^1.9.10",
     "taze": "19.7.0",
-    "tsdown": "^0.15.12",
+    "tsdown": "^0.16.4",
     "vinxi": "^0.5.8",
     "vite": "^7.2.2",
-    "vitest": "^3.2.4"
+    "vitest": "^4.0.9"
   },
   "overrides": {
     "vite": "npm:rolldown-vite@latest"
