@@ -2,7 +2,7 @@
   "name": "start-typed-routes-monorepo",
   "type": "module",
   "private": true,
-  "packageManager": "bun@1.3.2",
+  "packageManager": "bun@1.3.3",
   "workspaces": [
     "packages/*"
   ],
@@ -10,34 +10,34 @@
     "build": "bun run --filter start-typed-routes build",
     "dev": "bun run --filter start-typed-routes dev",
     "play": "bun run --filter start-typed-routes-playground dev",
-    "test": "bun run --filter start-typed-routes test",
-    "test:ui": "bun run --filter start-typed-routes test:ui",
+    "test": "cd packages/plugin && bun run test",
+    "test:ui": "cd packages/plugin && bun run test:ui",
     "lint": "bun --bun eslint . --fix",
     "check": "bun run --filter start-typed-routes check && bun run --filter start-typed-routes-playground check",
     "release": "bun run --filter start-typed-routes release",
-    "update": "taze latest -rw"
+    "update": "taze latest -wr"
   },
   "devDependencies": {
-    "@antfu/eslint-config": "^6.2.0",
+    "@antfu/eslint-config": "^6.4.2",
     "@solidjs/router": "^0.15.4",
     "@solidjs/start": "^1.2.0",
     "@solidjs/testing-library": "^0.8.10",
     "@tanstack/directive-functions-plugin": "1.121.21",
     "@types/node": "latest",
-    "@typescript/native-preview": "^7.0.0-dev.20251116.1",
-    "@vitest/coverage-v8": "^4.0.9",
-    "@vitest/ui": "3.2.4",
-    "bumpp": "^10.3.1",
+    "@typescript/native-preview": "^7.0.0-dev.20251206.1",
+    "@vitest/coverage-v8": "^4.0.15",
+    "@vitest/ui": "^4.0.15",
+    "bumpp": "^10.3.2",
     "eslint": "^9.39.1",
     "eslint-plugin-solid": "^0.14.5",
-    "happy-dom": "^20.0.10",
+    "happy-dom": "^20.0.11",
     "rolldown-plugin-solid": "^0.2.1",
     "solid-js": "^1.9.10",
     "taze": "19.7.0",
-    "tsdown": "^0.16.4",
+    "tsdown": "^0.17.0",
     "vinxi": "^0.5.8",
-    "vite": "^7.2.2",
-    "vitest": "^4.0.9"
+    "vite": "^7.2.6",
+    "vitest": "^4.0.15"
   },
   "overrides": {
     "vite": "npm:rolldown-vite@latest"
